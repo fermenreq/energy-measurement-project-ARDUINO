@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Medidor energia enchufes</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="pages/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 60px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+    <script type="text/javascript">
+    google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart1);
+      function drawChart1() {
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Intensidad', 0],
+          ['Potencia(W)', 0]
+        ]);
+        var options = {
+          width: 400, height: 400,
+          redFrom: 9000, redTo: 10000,
+          yellowFrom:7500, yellowTo: 9000,
+          minorTicks: 5,
+          min: 0,
+          max:10000
+        };
+        var data1 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Intensidad', 0],
+          ['Potencia(W)', 0]
+        ]);
+        var chart = new google.visualization.Gauge(document.getElementById('Medidores'));
+        var chart1 = new google.visualization.Gauge(document.getElementById('Medidores1'))
+        chart.draw(data, options);
+        chart1.draw(data1, options);
+        
+        setInterval(function() {
+            var JSON=$.ajax({
+                url:"http://localhost/actual.php",
+                dataType: 'json',
+                async: false}).responseText;
+            var Respuesta =jQuery.parseJSON(JSON);
+            
+          data.setValue(0, 1,Respuesta[0].INTENSIDAD);
+          data.setValue(1, 1,Respuesta[0].POTENCIA);
+          chart.draw(data, options);
+        }, 1300);
+
+        setInterval(function() {
+            var JSON1=$.ajax({
+                url:"http://localhost/actual2.php",
+                dataType: 'json',
+                async: false}).responseText;
+            var Respuesta1=jQuery.parseJSON(JSON1);
+            
+          data1.setValue(0, 1,Respuesta1[0].INTENSIDAD);
+          data1.setValue(1, 1,Respuesta1[0].POTENCIA);
+          chart1.draw(data1, options);
+        }, 1300);
+      }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://localhost/admin.html">Enchufes Inteligentes</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="http://localhost/hora.html">Consumo kW/H</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost/dia.html">Consumo Diario</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost/mes.html">Consumo Mensual</a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>Bienvenido! Estás viendo tu consumo en tiempo real</h1>
+            </div>
+        </div>
+        <div class="col-md-3 col-md-offset-3">
+               <ul class="list-unstyled">
+                    <h3>Enchufe 1</h3>
+                </ul>
+        </div>
+        <div class="col-md-3 col-md-offset-4" id="Medidores"></div>
+        <div class="col-md-3 col-md-offset-3">
+               <ul class="list-unstyled">
+                    <h3>Enchufe 2</h3>
+                </ul>
+        </div>
+        <div class="col-md-3 col-md-offset-4" id="Medidores1"></div>
+    </div>
+    <!-- /.container -->
+    <!-- jQuery Version 1.11.1 -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
+
