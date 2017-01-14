@@ -11,3 +11,4 @@ Both, control sensors, data and transmission, was made through with Arduino Boar
 Regarding the implementation of the Web Application, I used; Html5, Php7.0, JavaScript, Ajax and Bootstrap framework. For graphics on the web, I used graphics library that provides Google, called Google Charts.
 Finally, for the PCB layout, I used Fritzing. I opted to use it, because it’s a free program design, which stands out simplicity and speed to design any type of PCB you want.
 
+![13652901_724665871009190_5451296227876357221_o](https://cloud.githubusercontent.com/assets/25005913/21950431/f659edb4-d9fa-11e6-96bd-7a862bdcdaed.jpg)
