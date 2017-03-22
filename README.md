@@ -1,6 +1,6 @@
 # Energy-Measurement-Project: ARDUINO 
 
-Final career project about an energy measurenment system
+Final degree project about an energy measurenment system
 
 
 This manuscript presents an energy-measurement project for a particular home, composed by one or more devices using low cost microcontrollers.
