@@ -1,4 +1,4 @@
-# Energy-Measurement-Project: ARDUINO 
+# Energy-Measurement-Project with Arduino 
 
 Final degree project about an energy measurenment system
 
